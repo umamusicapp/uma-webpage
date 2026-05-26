@@ -358,25 +358,56 @@ UMA Music is a professional live streaming music application designed for artist
 
 <div class="song">
 <h3>🎵 UMA Intro</h3>
-<audio controls>
+<audio class="music-player" controls>
 <source src="uma-intro.mp3" type="audio/mpeg">
 </audio>
 </div>
 
 <div class="song">
 <h3>🎵 Song 1</h3>
-<audio controls>
+<audio class="music-player" controls>
 <source src="song1.mp3" type="audio/mpeg">
 </audio>
 </div>
 
 <div class="song">
 <h3>🎵 Song 2</h3>
-<audio controls>
+<audio class="music-player" controls>
 <source src="song2.mp3" type="audio/mpeg">
 </audio>
 </div>
+
+<div class="song">
+<h3>🎵 Song 3</h3>
+<audio class="music-player" controls>
+<source src="song3.mp3" type="audio/mpeg">
+</audio>
+</div>
 </section>
+
+<script>
+const players = document.querySelectorAll('.music-player');
+
+players.forEach((player, index) => {
+
+  player.addEventListener('play', () => {
+    players.forEach((otherPlayer) => {
+      if (otherPlayer !== player) {
+        otherPlayer.pause();
+        otherPlayer.currentTime = 0;
+      }
+    });
+  });
+
+  player.addEventListener('ended', () => {
+    const nextPlayer = players[index + 1];
+    if(nextPlayer){
+      nextPlayer.play();
+    }
+  });
+
+});
+</script>
 
 <section class="about-contact">
 <div class="box" id="about">
