@@ -87,8 +87,8 @@ gap:18px;
 }
 
 .logo img{
-width:75px;
-height:75px;
+width:85px;
+height:85px;
 border-radius:50%;
 box-shadow:0 0 30px rgba(255,0,0,0.45);
 animation:floatLogo 4s ease-in-out infinite;
@@ -98,6 +98,11 @@ animation:floatLogo 4s ease-in-out infinite;
 0%{transform:translateY(0);}
 50%{transform:translateY(-8px);}
 100%{transform:translateY(0);}
+}
+
+.logo-content{
+display:flex;
+flex-direction:column;
 }
 
 .logo h1{
@@ -116,6 +121,38 @@ letter-spacing:1px;
 color:#ddd;
 margin-top:-2px;
 }
+
+/* TOP AUDIO */
+
+.top-audio{
+margin-top:12px;
+display:flex;
+flex-direction:column;
+gap:8px;
+background:rgba(255,255,255,0.05);
+padding:10px 14px;
+border-radius:18px;
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,0.08);
+width:260px;
+}
+
+.audio-title{
+font-size:11px;
+font-weight:700;
+letter-spacing:1px;
+color:#ff8a8a;
+}
+
+.top-audio audio{
+width:100%;
+height:36px;
+border-radius:30px;
+overflow:hidden;
+filter:drop-shadow(0 0 10px rgba(255,0,0,0.25));
+}
+
+/* NAVIGATION */
 
 nav{
 display:flex;
@@ -149,14 +186,14 @@ nav a:hover{
 color:var(--secondary);
 }
 
-/* HERO */
+/* HERO SECTION */
 
 .hero{
 min-height:100vh;
 display:flex;
 align-items:center;
 justify-content:space-between;
-padding:170px 80px 100px;
+padding:210px 80px 100px;
 gap:60px;
 }
 
@@ -455,7 +492,7 @@ border-top:1px solid rgba(255,255,255,0.06);
 .hero{
 flex-direction:column;
 text-align:center;
-padding-top:180px;
+padding-top:260px;
 }
 
 .hero-right h2{
@@ -468,10 +505,13 @@ grid-template-columns:1fr;
 
 header{
 padding:18px 25px;
+flex-direction:column;
+gap:20px;
 }
 
 nav{
-display:none;
+flex-wrap:wrap;
+justify-content:center;
 }
 
 .features,
@@ -502,8 +542,17 @@ font-size:42px;
 font-size:40px;
 }
 
+.logo{
+flex-direction:column;
+text-align:center;
+}
+
 .logo h1{
 font-size:28px;
+}
+
+.top-audio{
+width:100%;
 }
 
 }
@@ -528,9 +577,24 @@ font-size:28px;
 
 <img src="logo.png" alt="UMA Logo">
 
-<div>
+<div class="logo-content">
+
 <h1>UMA <span>MUSIC</span></h1>
+
 <p>UNIFIED MUSIC APPLICATION</p>
+
+<div class="top-audio">
+
+<div class="audio-title">
+🎵 UMA INTRO MUSIC
+</div>
+
+<audio controls>
+<source src="uma-intro.mp3" type="audio/mpeg">
+</audio>
+
+</div>
+
 </div>
 
 </div>
@@ -567,7 +631,8 @@ Future of Digital Music Streaming
 </h3>
 
 <p>
-UMA Music (Unified Music Application) is a futuristic entertainment and streaming ecosystem designed for artists, DJs, creators, singers, labels, and music lovers worldwide. Experience premium live streaming, digital entertainment, artist engagement, and immersive music experiences through one powerful platform.
+UMA Music (Unified Music Application) is a futuristic entertainment and streaming ecosystem designed for artists, DJs, creators, singers, labels, and music lovers worldwide.
+Experience premium live streaming, digital entertainment, artist engagement, and immersive music experiences through one powerful platform.
 </p>
 
 <div class="buttons">
