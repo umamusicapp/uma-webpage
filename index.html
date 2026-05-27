@@ -1,457 +1,765 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>UMA Music | Unified Music Application</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 <style>
+
+:root{
+--primary:#ff1e1e;
+--secondary:#ff4d4d;
+--dark:#050505;
+--glass:rgba(255,255,255,0.06);
+--text:#ffffff;
+--muted:#cccccc;
+--gradient:linear-gradient(135deg,#120000,#3b0000,#070707);
+}
+
 *{
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:Arial, sans-serif;
+scroll-behavior:smooth;
 }
 
 body{
-background:linear-gradient(to bottom,#2b0000,#5c0000,#120000);
-color:white;
+font-family:'Poppins',sans-serif;
+background:var(--gradient);
+color:var(--text);
 overflow-x:hidden;
 }
 
+/* BACKGROUND EFFECTS */
+
+body::before{
+content:'';
+position:fixed;
+width:700px;
+height:700px;
+background:radial-gradient(circle,#ff0000,transparent 70%);
+top:-300px;
+right:-250px;
+opacity:0.12;
+z-index:-1;
+}
+
+body::after{
+content:'';
+position:fixed;
+width:600px;
+height:600px;
+background:radial-gradient(circle,#ff1e1e,transparent 70%);
+bottom:-250px;
+left:-250px;
+opacity:0.08;
+z-index:-1;
+}
+
+/* HEADER */
+
 header{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+padding:18px 70px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:20px 60px;
-background:rgba(0,0,0,0.2);
-position:sticky;
-top:0;
-backdrop-filter:blur(10px);
+backdrop-filter:blur(15px);
+background:rgba(0,0,0,0.35);
+border-bottom:1px solid rgba(255,255,255,0.08);
 z-index:1000;
 }
 
 .logo{
 display:flex;
 align-items:center;
-gap:15px;
+gap:18px;
 }
 
 .logo img{
-width:110px;
+width:75px;
+height:75px;
+border-radius:50%;
+box-shadow:0 0 30px rgba(255,0,0,0.45);
+animation:floatLogo 4s ease-in-out infinite;
+}
+
+@keyframes floatLogo{
+0%{transform:translateY(0);}
+50%{transform:translateY(-8px);}
+100%{transform:translateY(0);}
 }
 
 .logo h1{
-font-size:40px;
+font-size:34px;
+font-weight:800;
+letter-spacing:1px;
 }
 
 .logo span{
-color:#ff2b2b;
+color:var(--primary);
+}
+
+.logo p{
+font-size:12px;
+letter-spacing:1px;
+color:#ddd;
+margin-top:-2px;
+}
+
+nav{
+display:flex;
+gap:30px;
 }
 
 nav a{
-color:white;
 text-decoration:none;
-margin:0 15px;
-font-weight:bold;
+color:white;
+font-weight:500;
+transition:0.3s;
+position:relative;
+}
+
+nav a::after{
+content:'';
+position:absolute;
+left:0;
+bottom:-7px;
+width:0%;
+height:2px;
+background:var(--primary);
 transition:0.3s;
 }
 
-nav a:hover{
-color:#ff4d4d;
-}
-
-.hero{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:80px 70px;
-gap:50px;
-}
-
-.hero-left img{
-width:540px;
-filter:drop-shadow(0px 0px 30px rgba(255,0,0,0.5));
-}
-
-.hero-right{
-max-width:700px;
-}
-
-.tag{
-display:inline-block;
-padding:10px 20px;
-background:#7a0000;
-border-radius:40px;
-margin-bottom:25px;
-font-weight:bold;
-}
-
-.hero-right h2{
-font-size:95px;
-line-height:1;
-margin-bottom:20px;
-}
-
-.hero-right h2 span{
-color:#ff2b2b;
-}
-
-.hero-right h3{
-font-size:42px;
-margin-bottom:20px;
-color:#ff6666;
-}
-
-.hero-right p{
-font-size:22px;
-line-height:1.8;
-color:#f0f0f0;
-}
-
-.audio-box{
-margin-top:35px;
-background:rgba(255,255,255,0.07);
-padding:25px;
-border-radius:20px;
-}
-
-.audio-box h3{
-margin-bottom:15px;
-}
-
-.audio-box audio{
+nav a:hover::after{
 width:100%;
 }
 
+nav a:hover{
+color:var(--secondary);
+}
+
+/* HERO */
+
+.hero{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:170px 80px 100px;
+gap:60px;
+}
+
+.hero-left{
+flex:1;
+display:flex;
+justify-content:center;
+}
+
+.hero-left img{
+width:520px;
+max-width:100%;
+filter:drop-shadow(0 0 60px rgba(255,0,0,0.5));
+animation:heroFloat 5s ease-in-out infinite;
+}
+
+@keyframes heroFloat{
+0%{transform:translateY(0px);}
+50%{transform:translateY(-15px);}
+100%{transform:translateY(0px);}
+}
+
+.hero-right{
+flex:1;
+}
+
+.tag{
+display:inline-flex;
+align-items:center;
+gap:10px;
+padding:12px 22px;
+background:rgba(255,0,0,0.15);
+border:1px solid rgba(255,0,0,0.3);
+border-radius:50px;
+margin-bottom:25px;
+font-size:14px;
+font-weight:600;
+backdrop-filter:blur(10px);
+}
+
+.hero-right h2{
+font-size:100px;
+line-height:1;
+font-weight:800;
+margin-bottom:15px;
+}
+
+.hero-right h2 span{
+color:var(--primary);
+}
+
+.hero-right h3{
+font-size:38px;
+font-weight:600;
+margin-bottom:25px;
+color:#ff8d8d;
+}
+
+.hero-right p{
+font-size:19px;
+line-height:1.9;
+color:#dddddd;
+max-width:700px;
+}
+
+/* BUTTONS */
+
 .buttons{
-margin-top:35px;
+margin-top:40px;
+display:flex;
+gap:20px;
+flex-wrap:wrap;
 }
 
 .btn{
-display:inline-block;
-padding:16px 32px;
-border-radius:40px;
+padding:16px 34px;
+border-radius:50px;
 text-decoration:none;
-font-weight:bold;
-margin-right:20px;
-transition:0.3s;
+font-weight:600;
+transition:0.35s;
+display:inline-flex;
+align-items:center;
+gap:10px;
 }
 
 .btn-primary{
-background:#ff1e1e;
+background:linear-gradient(135deg,#ff1e1e,#ff4d4d);
 color:white;
+box-shadow:0 10px 30px rgba(255,0,0,0.25);
 }
 
 .btn-primary:hover{
-background:#ff4444;
-transform:scale(1.05);
+transform:translateY(-4px) scale(1.03);
 }
 
 .btn-outline{
-border:2px solid #ff4d4d;
+border:1px solid rgba(255,255,255,0.15);
+background:rgba(255,255,255,0.05);
 color:white;
+backdrop-filter:blur(10px);
 }
+
+.btn-outline:hover{
+background:rgba(255,255,255,0.08);
+}
+
+/* FEATURES */
 
 .features{
-padding:70px;
+padding:120px 80px;
 }
 
-.features h2{
+.section-title{
 text-align:center;
-font-size:50px;
-margin-bottom:50px;
+margin-bottom:70px;
+}
+
+.section-title h2{
+font-size:60px;
+font-weight:800;
+margin-bottom:18px;
+}
+
+.section-title p{
+font-size:18px;
+color:#ccc;
 }
 
 .feature-grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
 }
 
 .card{
-background:rgba(255,255,255,0.06);
-padding:30px;
-border-radius:20px;
-backdrop-filter:blur(5px);
-transition:0.3s;
+background:var(--glass);
+padding:35px;
+border-radius:30px;
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,0.08);
+transition:0.35s;
+position:relative;
+overflow:hidden;
+}
+
+.card::before{
+content:'';
+position:absolute;
+width:220px;
+height:220px;
+background:radial-gradient(circle,#ff1e1e,transparent 70%);
+top:-110px;
+right:-110px;
+opacity:0.08;
 }
 
 .card:hover{
 transform:translateY(-10px);
-background:rgba(255,255,255,0.1);
+border-color:rgba(255,0,0,0.3);
 }
 
 .card h3{
-margin-bottom:15px;
-color:#ff4d4d;
+font-size:24px;
+margin-bottom:18px;
+color:#ff7a7a;
 }
 
-.streaming{
-padding:70px;
+.card p{
+color:#ddd;
+line-height:1.8;
 }
 
-.streaming h2{
-text-align:center;
-font-size:50px;
-margin-bottom:40px;
+/* STATS */
+
+.stats{
+padding:0 80px 120px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
 }
 
-.song{
+.stat-box{
 background:rgba(255,255,255,0.05);
-padding:25px;
-border-radius:20px;
+padding:40px;
+border-radius:25px;
+text-align:center;
+backdrop-filter:blur(10px);
+border:1px solid rgba(255,255,255,0.06);
+}
+
+.stat-box h2{
+font-size:50px;
+margin-bottom:10px;
+color:var(--primary);
+}
+
+.stat-box p{
+color:#ddd;
+}
+
+/* ABOUT */
+
+.about{
+padding:120px 80px;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:35px;
+align-items:center;
+}
+
+.about-box{
+background:rgba(255,255,255,0.05);
+padding:45px;
+border-radius:30px;
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,0.08);
+}
+
+.about-box h2{
+font-size:45px;
 margin-bottom:25px;
 }
 
-.song h3{
-margin-bottom:15px;
-color:#ff4d4d;
+.about-box h2 span{
+color:var(--primary);
 }
 
-.song audio{
-width:100%;
+.about-box p{
+line-height:2;
+font-size:17px;
+color:#ddd;
 }
 
-.about-contact{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:30px;
-padding:70px;
+/* CONTACT */
+
+.contact{
+padding:120px 80px;
 }
 
-.box{
+.contact-card{
+max-width:850px;
+margin:auto;
 background:rgba(255,255,255,0.05);
-padding:35px;
-border-radius:20px;
+padding:55px;
+border-radius:35px;
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,0.08);
+text-align:center;
 }
 
-.box h3{
-font-size:35px;
+.contact-card h2{
+font-size:55px;
 margin-bottom:20px;
-color:#ff4d4d;
 }
 
-.box p{
-line-height:1.8;
+.contact-card p{
 font-size:18px;
+color:#ddd;
+margin-bottom:35px;
 }
+
+.email-list{
+display:flex;
+flex-direction:column;
+gap:18px;
+}
+
+.email-item{
+padding:18px;
+border-radius:18px;
+background:rgba(255,255,255,0.05);
+font-size:18px;
+transition:0.3s;
+}
+
+.email-item:hover{
+background:rgba(255,255,255,0.08);
+transform:scale(1.02);
+}
+
+/* FOOTER */
 
 footer{
+padding:35px;
 text-align:center;
-padding:30px;
-background:#0b0000;
-color:#ccc;
+background:#030303;
+color:#999;
+font-size:15px;
+border-top:1px solid rgba(255,255,255,0.06);
 }
 
-@media(max-width:950px){
+/* RESPONSIVE */
+
+@media(max-width:1100px){
+
 .hero{
 flex-direction:column;
 text-align:center;
+padding-top:180px;
 }
 
 .hero-right h2{
-font-size:60px;
+font-size:72px;
 }
 
-.hero-right h3{
-font-size:28px;
-}
-
-.hero-left img{
-width:320px;
-}
-
-.about-contact{
+.about{
 grid-template-columns:1fr;
 }
 
 header{
-flex-direction:column;
+padding:18px 25px;
 }
 
 nav{
-margin-top:20px;
+display:none;
 }
+
+.features,
+.stats,
+.about,
+.contact{
+padding-left:25px;
+padding-right:25px;
 }
+
+}
+
+@media(max-width:700px){
+
+.hero-right h2{
+font-size:52px;
+}
+
+.hero-right h3{
+font-size:24px;
+}
+
+.section-title h2{
+font-size:42px;
+}
+
+.contact-card h2{
+font-size:40px;
+}
+
+.logo h1{
+font-size:28px;
+}
+
+}
+
 </style>
+
 </head>
 
 <body>
 
-<header>
-<div class="logo">
-<img src="logo.png" alt="UMA Music Logo">
-<div>
-<h1>UMA <span>MUSIC</span></h1>
-<p>Unified Music Application</p>
-</div>
-</div>
-
-<nav>
-<a href="#">HOME</a>
-<a href="#features">FEATURES</a>
-<a href="#about">ABOUT</a>
-<a href="#contact">CONTACT</a>
-</nav>
-</header>
-
-<section class="hero">
-<div class="hero-left">
-<img src="logo.png" alt="UMA Music">
-</div>
-
-<div class="hero-right">
-<div class="tag">🔴 LIVE MUSIC STREAMING PLATFORM</div>
-
-<h2>UMA <span>MUSIC</span></h2>
-
-<h3>UNIFIED MUSIC APPLICATION</h3>
-
-<p>
-UMA Music is a professional live streaming music application designed for artists, creators, DJs, singers, and music lovers worldwide. Stream songs, listen to live performances, discover artists, and enjoy entertainment in one unified platform.
-</p>
-
-<div class="audio-box">
-<h3>🎵 UMA Intro Music</h3>
-<audio controls>
-<source src="uma-intro.mp3" type="audio/mpeg">
-</audio>
-</div>
-
-<div class="buttons">
-<a href="#about" class="btn btn-primary">▶ ENTER UMA MUSIC</a>
-<a href="#contact" class="btn btn-outline">📩 CONTACT US</a>
-</div>
-</div>
-</section>
-
-<section class="features" id="features">
-<h2>WHY UMA MUSIC?</h2>
-
-<div class="feature-grid">
-<div class="card">
-<h3>🚀 PROFESSIONAL STREAMING PLATFORM</h3>
-<p>Premium next-generation music streaming platform with immersive digital experiences.</p>
-</div>
-<div class="card">
-<h3>🎵 LIVE MUSIC EXPERIENCE</h3>
-<p>Experience live music streaming with premium sound quality.</p>
-</div>
-
-<div class="card">
-<h3>🌍 GLOBAL PLATFORM</h3>
-<p>Connect artists and listeners around the world instantly.</p>
-</div>
-
-<div class="card">
-<h3>💬 LIVE INTERACTION</h3>
-<p>Real-time chat and audience engagement during streaming.</p>
-</div>
-
-<div class="card">
-<h3>📱 MOBILE READY</h3>
-<p>Works perfectly on Android, iPhone, tablets, and desktop.</p>
-</div>
-</div>
-</section>
+<!-- AUTO INTRO MUSIC -->
 
 <audio id="umaIntro" autoplay loop>
 <source src="uma-intro.mp3" type="audio/mpeg">
 </audio>
 
-#<div class="logo-player" id="logoPlayer">
-#<img src="logo.png" alt="UMA Music Logo">
-#<div class="music-text">🎵 CLICK LOGO TO PLAY UMA INTRO</div>
-#</div>
+<!-- HEADER -->
 
-<style>
-.logo-player{
-position:fixed;
-top:20px;
-right:20px;
-display:flex;
-align-items:center;
-gap:15px;
-background:rgba(0,0,0,0.6);
-padding:12px 20px;
-border-radius:60px;
-backdrop-filter:blur(10px);
-z-index:9999;
-cursor:pointer;
-transition:0.3s;
-}
+<header>
 
-.logo-player:hover{
-transform:scale(1.05);
-background:rgba(255,0,0,0.2);
-}
+<div class="logo">
 
-.logo-player img{
-width:60px;
-height:60px;
-border-radius:50%;
-}
+<img src="logo.png" alt="UMA Logo">
 
-.music-text{
-font-weight:bold;
-font-size:14px;
-color:white;
-letter-spacing:1px;
-}
-</style>
+<div>
+<h1>UMA <span>MUSIC</span></h1>
+<p>UNIFIED MUSIC APPLICATION</p>
+</div>
 
-<script>
-const audio = document.getElementById('umaIntro');
-const logoPlayer = document.getElementById('logoPlayer');
+</div>
 
-window.addEventListener('load', () => {
-  audio.volume = 1;
+<nav>
+<a href="#">Home</a>
+<a href="#features">Features</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+</nav>
 
-  const playPromise = audio.play();
+</header>
 
-  if(playPromise !== undefined){
-    playPromise.catch(() => {
-      logoPlayer.addEventListener('click', () => {
-        audio.play();
-      }, { once:true });
-    });
-  }
-});
+<!-- HERO -->
 
-logoPlayer.addEventListener('click', () => {
-  if(audio.paused){
-    audio.play();
-  }
-});
-</script>
+<section class="hero">
 
-<section class="about-contact">
-<div class="box" id="about">
-<h3>ABOUT UMA MUSIC</h3>
+<div class="hero-left">
+<img src="logo.png" alt="UMA Music">
+</div>
+
+<div class="hero-right">
+
+<div class="tag">
+🔴 LIVE GLOBAL MUSIC STREAMING PLATFORM
+</div>
+
+<h2>
+UMA <span>MUSIC</span>
+</h2>
+
+<h3>
+Future of Digital Music Streaming
+</h3>
+
 <p>
-UMA stands for Unified Music Application. UMA Music is a modern entertainment and streaming platform created to unite artists, music creators, and fans through live digital experiences.
+UMA Music (Unified Music Application) is a futuristic entertainment and streaming ecosystem designed for artists, DJs, creators, singers, labels, and music lovers worldwide. Experience premium live streaming, digital entertainment, artist engagement, and immersive music experiences through one powerful platform.
+</p>
+
+<div class="buttons">
+
+<a href="#features" class="btn btn-primary">
+▶ Explore Platform
+</a>
+
+<a href="#contact" class="btn btn-outline">
+📩 Contact Us
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- FEATURES -->
+
+<section class="features" id="features">
+
+<div class="section-title">
+
+<h2>Why UMA Music?</h2>
+
+<p>
+Professional streaming ecosystem built for the future of entertainment.
+</p>
+
+</div>
+
+<div class="feature-grid">
+
+<div class="card">
+<h3>🎵 Premium Streaming</h3>
+<p>
+High-quality live streaming with immersive digital sound experiences.
 </p>
 </div>
 
-<div class="box" id="contact">
-<h3>CONTACT US</h3>
-<p>📧 admin@umamusic.online</p>
-<p>📧 support@umamusic.online</p>
-<p>📧 contact@umamusic.online</p>
+<div class="card">
+<h3>🌍 Global Artist Network</h3>
+<p>
+Connect artists, fans, creators, and communities globally in real-time.
+</p>
 </div>
+
+<div class="card">
+<h3>🚀 Futuristic Platform</h3>
+<p>
+Modern technology, premium UI, and next-generation entertainment infrastructure.
+</p>
+</div>
+
+<div class="card">
+<h3>📱 Cross Platform</h3>
+<p>
+Optimized for Android, iPhone, tablets, desktop, and smart devices.
+</p>
+</div>
+
+<div class="card">
+<h3>💬 Live Engagement</h3>
+<p>
+Real-time interaction between creators and audiences worldwide.
+</p>
+</div>
+
+<div class="card">
+<h3>🔐 Secure Ecosystem</h3>
+<p>
+Advanced secure streaming infrastructure with scalable performance.
+</p>
+</div>
+
+</div>
+
 </section>
 
-<section style="padding:80px 70px; text-align:center;">
-<h2 style="font-size:55px; margin-bottom:25px;">WELCOME TO UMA MUSIC</h2>
-<p style="font-size:24px; color:#ddd; max-width:900px; margin:auto; line-height:1.8;">
-UMA Music is a futuristic Unified Music Application designed for live entertainment, artist promotions, digital streaming, and immersive music experiences.
-</p>
+<!-- STATS -->
+
+<section class="stats">
+
+<div class="stat-box">
+<h2>24/7</h2>
+<p>Music Streaming</p>
+</div>
+
+<div class="stat-box">
+<h2>100+</h2>
+<p>Artists & Creators</p>
+</div>
+
+<div class="stat-box">
+<h2>Global</h2>
+<p>Digital Reach</p>
+</div>
+
+<div class="stat-box">
+<h2>Premium</h2>
+<p>Entertainment Experience</p>
+</div>
+
 </section>
+
+<!-- ABOUT -->
+
+<section class="about" id="about">
+
+<div class="about-box">
+
+<h2>
+About <span>UMA Music</span>
+</h2>
+
+<p>
+UMA stands for Unified Music Application. UMA Music is a modern entertainment ecosystem designed to unite artists, creators, labels, brands, and listeners through powerful digital music experiences and immersive streaming technology.
+</p>
+
+</div>
+
+<div class="about-box">
+
+<h2>
+Our Vision
+</h2>
+
+<p>
+To create one unified global ecosystem where entertainment, artists, technology, music communities, and audiences connect seamlessly through next-generation digital experiences.
+</p>
+
+</div>
+
+</section>
+
+<!-- CONTACT -->
+
+<section class="contact" id="contact">
+
+<div class="contact-card">
+
+<h2>Contact UMA Music</h2>
+
+<p>
+Business partnerships, artist promotions, collaborations, and streaming inquiries.
+</p>
+
+<div class="email-list">
+
+<div class="email-item">
+📧 admin@umamusic.online
+</div>
+
+<div class="email-item">
+📧 support@umamusic.online
+</div>
+
+<div class="email-item">
+📧 contact@umamusic.online
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- FOOTER -->
 
 <footer>
-© 2026 UMA Music | Unified Music Application | All Rights Reserved.
+© 2026 UMA Music — Unified Music Application. All Rights Reserved.
 </footer>
 
+<script>
+
+const audio = document.getElementById('umaIntro');
+
+window.addEventListener('load',()=>{
+
+const playPromise = audio.play();
+
+if(playPromise !== undefined){
+
+playPromise.catch(()=>{});
+
+}
+
+});
+
+</script>
+
 </body>
+
 </html>
